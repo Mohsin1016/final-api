@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const User = require('./models/UserModel');
 const Message = require('./models/MessageModel');
 const ws = require('ws');
+const multer = require('multer');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
 dotenv.config();
@@ -16,11 +17,7 @@ const jwtSecret = process.env.JWT_SECRET;
 const bcryptSalt = bcrypt.genSaltSync(10);
 
 const app = express();
-const uploadDir = __dirname + '/uploads';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-app.use('/uploads', express.static(uploadDir));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = ['https://final-client2.onrender.com'];
