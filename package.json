@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@azure/storage-blob": "^12.23.0",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -16,6 +17,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js" 
+    "dev": "nodemon index.js"
   }
 }
