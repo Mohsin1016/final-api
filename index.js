@@ -18,11 +18,6 @@ const jwtSecret = process.env.JWT_SECRET;
 const bcryptSalt = bcrypt.genSaltSync(10);
 
 const app = express();
-const uploadDir = __dirname + '/uploads';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-app.use('/uploads', express.static(uploadDir));
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = ['https://final-client2.onrender.com'];
@@ -201,7 +196,10 @@ wss.on('connection', (connection, req) => {
       fs.writeFileSync(filePath, bufferData);
 
       // Upload to Azure Blob Storage
+      console.log(fileName);
+      console.log(filePath);
       fileUrl = await uploadToAzureBlob(fileName, filePath);
+      console.log(fileUrl);
     }
     if (recipient && (text || fileUrl)) {
       const messageDoc = await Message.create({
